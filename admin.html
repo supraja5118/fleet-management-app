@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family :Arial,sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:#fafafa;
+ }
+ .navbar {
+    background-color:#444;
+    color:white;
+    padding:10px;
+    text-align:center;
+}
+.container {
+    display:flex;
+    }
+    .sidebar {
+        background-color: #e6e6e6;
+        padding:15px;
+        width:250px;
+    }
+    .main-content {
+        padding:15px;
+        flex-grow:1;
+        display:grid;
+        grid-template-columns:repeat(3, 1fr);
+        gap: 10px;
+    }
+    .card {
+        background-color:white;
+        padding:10px;
+        border :1px solid #ccc;
+        border-radius:3px;
+    }
+    .form-group {
+        margin-bottom: 10px;
+    }
+    label {
+        display:block;
+        margin-bottom: 4px;
+        font-size:14px;
+    }
+    input, select,button {
+        width:100%;
+        padding:6px;
+        font-size:14px;
+} 
+button {
+    background-color: #4CAF50;
+    color:white;
+    border:none;
+    cursor:pointer;
+    margin-top:5px;
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Admin Dashboard</h2>
+</div>
+<div class="container">
+    <div class="sidebar">
+        <h3>Fleet Form</h3>
+        <div class ="form-group">
+            <label for="regNo">Rreg No of Vehicle</label>
+            <input type="text"id ="regNo" required>
+ </div>
+ <div class="form-group">
+    <label for="category"> category</label>
+    <select id="category" required>
+        <option value="">Select</option>
+        <option value="Auto">Auto</option>
+        <option value="Car">Car</option>
+        <option value="Truck">Truck</option>
+        <option value="Bus">Bus</option>
+    </select>
+ </div>
+ <div class ="form-group">
+    <label for="driverName">Driver Name</label>
+    <input type="text" id ="driverName" required>
+</div>
+<div class="form-group">
+    <lable for="isAvailable"> Is Available</lable>
+    <select id="isAvailable" required>
+        <option value="Available">Available</option>
+        <option value="Not Available">Not Available</option>
+    </select>
+</div>
+<button onclick="addFleet()">Add Fleet</button>
+    </div>
+    <div class="main-content" id ="mainContent"></div>
+</div>
+<script>
+    function addFleet(){
+        const regNo = document.getElementById('regNo').value;
+        const category = document.getElementById('category').value;
+        const driverName = document.getElementById('driverName').value;
+        const isAvailable = document.getElementById('isAvailable').value;
+        if (regNo && category && driverName && isAvailable) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML=`
+                          <h4>${regNo}</h4>
+                          <p><strong>Category:</strong> ${category}</p>
+                          <p><strong>Driver:</strong> ${driverName}</p>
+                          <p><strong>Status:</strong> ${isAvailable}</p>
+                          `;
+                          document.getElementById('mainContent').appendChild(card);
+                          document.getElementById('regNo').value='';
+                          document.getElementById('category').value='';
+                          document.getElemnetById('driverName').value='';
+                          document.getElementById('isAvailable').value='Available';
+        } else {
+            alert ('Please fill all fields');
+        }
+    }
+</script>
+    
+</body>
+</html>
